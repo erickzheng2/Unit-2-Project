@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Game {
     public static String targetWord = "";
+    public static boolean roundWin = false;
 
     public static String generateWord(ArrayList<String> wordList) {
         String word = wordList.get((int) (Math.random() * (wordList.size() + 1))); //generates random number between 0 and the max size of the wordList and sets "word" to that random index
@@ -26,5 +27,9 @@ public class Game {
         } catch (FileNotFoundException e) { //catches the error in case file is not found
             return fileData;
         }
+    }
+
+    public static boolean checkValidWord (String word){ // checks if a word is a valid number of characters
+        return word.length() == targetWord.length();
     }
 }

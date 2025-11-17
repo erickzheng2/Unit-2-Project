@@ -10,14 +10,44 @@ public class Main {
         Game.targetWord = Game.generateWord(wordList); //sets a public static variable in the object "Game" to a random word from the word list
         System.out.println(Game.targetWord);
         String userInput = "";
+        String hint = "";
 
-        userInput = scan.nextLine();
-        if (userInput.equalsIgnoreCase(Game.targetWord)){
-            System.out.println("You got it right!!!");
-        }
-        else{
-            System.out.println("Wrong!!!");
+        while(!Game.roundWin){ //while the user has not guessed the word correctly
+            userInput = scan.nextLine(); //waits for user's guess
+
+            if (userInput.equalsIgnoreCase(Game.targetWord))  //if the user's guess matches the target word, end the round.
+            {
+                System.out.println("You got it right!!!");
+                Game.roundWin = true;
+            }else{
+                System.out.println("Wrong!!!");
+
+                if(!Game.checkValidWord(userInput)){
+                    System.out.println("Your word is not " + Game.targetWord.length() + " characters long!");
+                }else{
+                    for(int x = 0; x < Game.targetWord.length(); x++){
+                        for(int y = 0; y < Game.targetWord.length(); y++){
+                            if(userInput.substring(x, x + 1).equalsIgnoreCase(Game.targetWord.substring(y, y + 1))){
+                                if (x == y){
+                                    hint += "O";
+                                } else {
+                                    hint += "?";
+                                }
+                            }
+
+
+                        }
+
+
+
+                    }
+
+                }
+            }
+
+
         }
 
     }
 }
+
