@@ -7,6 +7,7 @@ public class Game {
     public static String targetWord = "";
     public static boolean roundWin = false;
     public static String hint = "XXXXX";
+    public static int guesses = 0;
 
     public static String generateWord(ArrayList<String> wordList) {
         String word = wordList.get((int) (Math.random() * (wordList.size() + 1))); //generates random number between 0 and the max size of the wordList and sets "word" to that random index
@@ -45,19 +46,35 @@ public class Game {
     public static void checkYellow (String guess){
         for (int x = 0; x < guess.length(); x++){
             for (int y = 0; y < targetWord.length(); y++){
-                if(guess.substring(x, x + 1).equalsIgnoreCase(Game.targetWord.substring(y, y + 1)) && x != y){
-                        Game.hint = Game.hint.substring(0, x) + "?" + Game.hint.substring(x + 1); //if a match is found, "insert" a 0 at that location
+                if(guess.substring(x, x + 1).equalsIgnoreCase(Game.targetWord.substring(y, y + 1)) && x != y){ //compared a letter in user guess with every letter in target word
+
+                    Game.hint = Game.hint.substring(0, x) + "?" + Game.hint.substring(x + 1); //if a match is found, "insert" a ? at that location
                     }
                 }
             }
         }
 
-//
-//    public static void checkGrey (String guess){}
-
     public static void clearHint (){ //static function to clear hint
         Game.hint = "XXXXX";
     }
+
+    /*
+    public static void checkDuplicates(String guess){
+        ArrayList<Character> duplicateChar = new ArrayList<>();
+        ArrayList<Integer> duplicateAmount = new ArrayList<>();
+
+        for (int x = 0; x < targetWord.length(); x++){
+            for (int y = 0; y < targetWord.length(); y++) {
+                if (targetWord.substring(x, x + 1).equalsIgnoreCase(Game.targetWord.substring(y, y + 1)) && x != y) {
+                    for (int z = 0; z < guess.length(); z++){
+                        if (targetWord.substring(x, x + 1).equalsIgnoreCase(guess.substring(z, z + 1)) && x != z) {}
+                    }
+                }
+            }
+        }
+
+    }
+ */
 }
 
 

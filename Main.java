@@ -26,9 +26,9 @@ public class Main {
                 if(!Game.checkValidWord(userInput)){ //lets user know if guess was invalid
                     System.out.println("Your word is not " + Game.targetWord.length() + " characters long!");
                 }else{ //else since guess was valid but wrong, generate hint
+
+                    Game.checkYellow(userInput);
                     Game.checkGreen(userInput);
-//                    Game.checkYellow(userInput);
-//                    Game.checkGrey(userInput);
                     System.out.println(Game.hint);
                     Game.clearHint();
 
