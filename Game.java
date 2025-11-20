@@ -5,9 +5,14 @@ import java.util.Scanner;
 
 public class Game {
     public static String targetWord = "";
-    public static boolean roundWin = false;
     public static String hint = "XXXXX";
+
+    public static boolean roundWin = false;
+    public static boolean gameEnd = false;
+
     public static int guesses = 0;
+    public static int targetScore = 0;
+
 
     public static String generateWord(ArrayList<String> wordList) {
         String word = wordList.get((int) (Math.random() * (wordList.size() + 1))); //generates random number between 0 and the max size of the wordList and sets "word" to that random index
@@ -48,7 +53,7 @@ public class Game {
             for (int y = 0; y < targetWord.length(); y++){
                 if(guess.substring(x, x + 1).equalsIgnoreCase(Game.targetWord.substring(y, y + 1)) && x != y){ //compared a letter in user guess with every letter in target word
 
-                    Game.hint = Game.hint.substring(0, x) + "?" + Game.hint.substring(x + 1); //if a match is found, "insert" a ? at that location
+                    Game.hint = Game.hint.substring(0, x) +  "?" + Game.hint.substring(x + 1); //if a match is found, "insert" a ? at that location
                     }
                 }
             }
@@ -56,6 +61,27 @@ public class Game {
 
     public static void clearHint (){ //static function to clear hint
         Game.hint = "XXXXX";
+    }
+
+    public static void renderHintColor (String guess){
+        String newHint = "";
+        for (int i = 0; i < hint.length(); i++){
+            if (hint.charAt(i) == 'X'){
+                newHint += TextColor.WHITE + guess.charAt(i) + TextColor.RESET;
+            }
+            if (hint.charAt(i) == 'O'){
+                newHint += TextColor.GREEN + guess.charAt(i) + TextColor.RESET;
+            }
+            if (hint.charAt(i) == '?'){
+                newHint += TextColor.YELLOW + guess.charAt(i) + TextColor.RESET;
+            }
+        }
+        hint = newHint;
+    }
+
+    public static void calcScore (){
+
+
     }
 
     /*

@@ -13,32 +13,35 @@ public class Main {
         String userInput = "";
         String hint = "";
 
-        while(!Game.roundWin){ //while the user has not guessed the word correctly
-            userInput = scan.nextLine(); //waits for user's guess
+        while(!Game.gameEnd) {//while the user has not lost yet
+            while (!Game.roundWin) { //while the user has not guessed the word correctly
+                userInput = scan.nextLine(); //waits for user's guess
 
-            if (userInput.equalsIgnoreCase(Game.targetWord))  //if the user's guess matches the target word, end the round.
-            {
-                System.out.println("You got it right!!!");
-                Game.roundWin = true;
-            }else{ //else move on to detecting invalid guesses and providing hints for wrong guesses
-                System.out.println("Wrong!!!");
+                if (userInput.equalsIgnoreCase(Game.targetWord))  //if the user's guess matches the target word, end the round.
+                {
+                    System.out.println("You got it right!!!");
+                    Game.calcScore();
+                    Game.roundWin = true;
+                } else { //else move on to detecting invalid guesses and providing hints for wrong guesses
+                    System.out.println("Wrong!!!");
 
-                if(!Game.checkValidWord(userInput)){ //lets user know if guess was invalid
-                    System.out.println("Your word is not " + Game.targetWord.length() + " characters long!");
-                }else{ //else since guess was valid but wrong, generate hint
+                    if (!Game.checkValidWord(userInput)) { //lets user know if guess was invalid
+                        System.out.println("Your word is not " + Game.targetWord.length() + " characters long!");
+                    } else { //else since guess was valid but wrong, generate hint
 
-                    Game.checkYellow(userInput);
-                    Game.checkGreen(userInput);
-                    System.out.println(Game.hint);
-                    Game.clearHint();
+                        Game.checkYellow(userInput);
+                        Game.checkGreen(userInput);
+                        Game.renderHintColor(userInput);
+                        System.out.println(Game.hint);
+                        Game.clearHint();
+
+
+                    }
 
 
                 }
-
-
             }
         }
-
 
     }
 
