@@ -7,11 +7,14 @@ public class Game {
     public static String targetWord = "";
     public static String hint = "XXXXX";
 
+    public static boolean wordCorrect = false;
     public static boolean roundWin = false;
     public static boolean gameEnd = false;
 
-    public static int guesses = 0;
+    public static int guesses = 1;
+    public static int rounds = 1;
     public static int targetScore = 0;
+    public static int userScore = 0;
 
 
     public static String generateWord(ArrayList<String> wordList) {
@@ -80,8 +83,17 @@ public class Game {
     }
 
     public static void calcScore (){
+        Game.userScore += (int) (-2 * Math.pow(Game.guesses, 0.8) + 12);
+        System.out.println("CURRENT SCORE: " + Game.userScore);
+        if (userScore >= targetScore){
+            System.out.println("GOAL REACHED, PROCEEDING TO ROUND " + Game.rounds);
+            Game.userScore = 0; //resets player score
+            roundWin = true;
+        }
+    }
 
-
+    public static void calcTargetScore (){
+        Game.targetScore = (int)(5 * Math.pow(Game.rounds, 1.1));
     }
 
     /*
