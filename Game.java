@@ -11,7 +11,9 @@ public class Game {
     public static boolean roundWin = false;
     public static boolean gameEnd = false;
 
+    public static int lives = 3;
     public static int guesses = 1;
+    public static int maxGuesses = 9;
     public static int rounds = 1;
     public static int targetScore = 0;
     public static int userScore = 0;
@@ -86,7 +88,8 @@ public class Game {
         Game.userScore += (int) (-2 * Math.pow(Game.guesses, 0.8) + 12);
         System.out.println("CURRENT SCORE: " + Game.userScore);
         if (userScore >= targetScore){
-            System.out.println("GOAL REACHED, PROCEEDING TO ROUND " + Game.rounds);
+            System.out.println("GOAL REACHED, PROCEEDING TO ROUND " + (Game.rounds + 1));
+            System.out.println("YOUR SCORE HAS BEEN RESET!");
             Game.userScore = 0; //resets player score
             roundWin = true;
         }
@@ -94,6 +97,26 @@ public class Game {
 
     public static void calcTargetScore (){
         Game.targetScore = (int)(5 * Math.pow(Game.rounds, 1.1));
+    }
+
+    public static void introductionPrint(){
+        System.out.println("Welcome to Rogue-dle!!! (copyright still pending)");
+        System.out.println("It's like Wordle but objectively worse!!!");
+        System.out.println();
+        System.out.println("You will proceed through multiple rounds, each consecutive round will have an increasingly larger target score you must reach. You score points by guessing 5 letter words correctly!");
+        System.out.println("The less guesses you solve the word in, the more points you earn!");
+        System.out.println();
+        System.out.println("Be careful, you only have a limited number of guesses per word! If all you use all your guesses, you will lose a life and the word will reset!");
+        System.out.println("You only have 3 lives.");
+        System.out.println();
+        System.out.println("If you are a cat, please contact our customer service hotline to redeem additional lives.");
+        System.out.println();
+        System.out.println("_________________________________________________________________________________________________________________________");
+        System.out.println();
+        System.out.println("Just some helpful hints for the road. Duplicate letters are tricky, and don't behave like Wordle!");
+        System.out.println("There are not capitals, its all lowercase.");
+        System.out.println("_________________________________________________________________________________________________________________________");
+
     }
 
     /*
